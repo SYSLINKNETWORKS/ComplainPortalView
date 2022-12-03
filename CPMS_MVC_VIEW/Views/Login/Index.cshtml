@@ -1,0 +1,176 @@
+﻿
+@{
+    Layout = null;
+}
+
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="images/favicon.ico" type="image/ico" />
+    <title> Login </title>
+    <!-- Bootstrap -->
+    <link href="~/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="~/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="~/vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- Animate.css -->
+    <link href="~/vendors/animate.css/animate.min.css" rel="stylesheet">
+    <!-- Custom Theme Style -->
+    <link href="~/build/css/custom.min.css" rel="stylesheet">
+</head>
+@*style="background-color:#6191c2"*@
+<body class="login">
+
+    <div>
+        <a class="hiddenanchor" id="signup"></a>
+        <a class="hiddenanchor" id="signin"></a>
+        <div class="login_wrapper" style="text-align: center;">
+            <a href="#" class="site_title">
+                <img src="~/images/mmclogo.png" style="width: 100px; height:auto;">
+            </a>
+        </div>
+        <div class="login_wrapper">
+            <div id="div_log" class="animate form login_form" style="background: white;    padding-right:   35px;padding-left:   35px;">
+                <section class="login_content">
+                    <h1>Login</h1>
+                    <div id="txterr" style="color:red;text-transform:uppercase;"></div>
+                    <div class="form-group">
+                        <input type="text" id="txtusername" class="form-control" placeholder="Username" required="" />
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        <input type="password" id="txtuserpassword" class="form-control" placeholder="Password" required="" />
+                    </div>
+                    <br />
+                    <div>
+                        <a id="btn_sub" class="btn btn-default submit" onclick=Login();>Log in</a>
+                        <img id="img_load" src="~/images/Authenticating.GIF" />
+                        <div class="clearfix"></div>
+
+                    </div>
+                </section>
+            </div>
+
+            <div class="clearfix"></div>
+            <div class="separator">
+                <div class="clearfix"></div>
+                <br />
+                <div>
+                    <p>©2019 All Rights Reserved - MMC</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+
+    @*<script language="javascript" type="text/javascript">
+            var btnsub = $("#btn_sub");
+            var imgload = $("#img_load");
+           var apiUrl = '@System.Configuration.ConfigurationManager.AppSettings["IFS"]';
+            var dataip = "_";
+
+            $(document).ready(function () {
+                imgload.hide();
+                var strkey = localStorage.getItem(1);
+                if (strkey != null) {
+                    window.location.assign("@Url.Content("~/Main")");
+                }
+
+                $("#txtusername").focus();
+            });
+
+            //Login Start
+            function Login() {
+
+
+                var txt_nam = $("#txtusername").val();
+                var txt_pwd = $("#txtuserpassword").val();
+                var txt_err = $("#txterr");
+                var divlog = $("#div_log");
+                var ddbranch = $('#dd_branch');
+                if (txt_nam == "") {
+                    alert("Please Enter your Login");
+                    return false;
+                } else if (txt_pwd == "") {
+                    alert("Please enter Password");
+                    return false;
+                }
+                //alert( checklogin());
+
+              //  if (checklogin()) { return; }
+                //checklogin();
+                $.ajax({
+                    type: "POST",
+                    cache: false,
+                    url: apiUrl + '/Login/login/' + txt_nam + "/" + txt_pwd ,
+                    contentType: "application/json",
+                    dataType: "json",
+                    data: JSON.stringify({"userheader": navigator.userAgent, "wanip": dataip }),
+                    beforeSend: function () {
+                        imgload.show();
+                        btnsub.hide();
+                    },
+
+                    success: function (response) {
+                        localStorage.clear();
+                        if (response[0].status == 1) {
+                            imgload.hide();
+                            btnsub.show();
+                            localStorage.setItem(1, response[0].Key);
+                            window.location.assign("@Url.Content("~/Main")");
+
+                        }
+                        else {
+                            imgload.hide();
+                            btnsub.show();
+
+                            txt_err.html("<h2>" + response[0].Remarks + "</h2>");
+                            alert(response[0].Remarks);
+                        }
+                    },
+                    error: function (error) {
+                        imgload.hide();
+                        btnsub.show();
+                        console.log('Error ' + error)
+                        alert('Error ' + error)
+                    }
+                })
+
+                return true;
+
+            }
+            //Login End
+
+
+
+
+
+
+            $("#txtusername").keyup(function (e) {
+                if (e.keyCode === 13)
+                {
+                    $("#txtuserpassword").focus();
+                }
+            });
+            $("#txtuserpassword").keyup(function (e) {
+                if (e.keyCode === 13) {
+                    Login();
+                }
+            });
+
+        </script>*@
+    <script language="javascript" type="text/javascript">
+       var apiUrl = '@System.Configuration.ConfigurationManager.AppSettings["IFS"]';
+
+    </script>
+    <script src="~/FunctionJS/Login/Login.js?@Guid.NewGuid().ToString("n")"></script>
+</body>
+
+</html>

@@ -1,0 +1,39 @@
+﻿body {
+    background-color:greenyellow;
+}
+
+@media print {
+    header:after {
+        content: "Welcome";
+    }
+
+    a[href*='//']:after {
+        content: " (" attr(href) ") ";
+        /*color: $primary;*/
+    }
+}
+
+@page {
+    margin-top: 2cm;
+    margin-bottom: 2cm;
+    margin-left: 2cm;
+    margin-right: 2cm;
+}
+
+.book-date {
+    page-break-after: always;
+}
+
+.post-content {
+    page-break-before: always;
+}
+
+.page-number:before {
+    /* counter-increment: page; */
+    content: "Pagina " counter(page);
+}
+
+p {
+    page-break-inside: avoid;
+}
+

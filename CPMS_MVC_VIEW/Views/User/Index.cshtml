@@ -1,0 +1,230 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE html>
+<div id="img_load" style="width:100%;text-align:center;">
+    <img src="~/images/working.GIF" />
+</div>
+<div class="row">
+    <div class="col-md-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Users<small style="color:red"><span id="lbl_ref_time"></span></small></h2>
+                <p style="text-align:right;">
+                    <button id="btn_new" class="btn btn-info"> New</button>
+                </p>
+                <div class="clearfix"></div>
+            </div>
+            <div class="container">
+                <div class="x_content">
+                    <div class="row">
+                        <div class="col-md-12 col-xs-12">
+                            <div class="card-box table-responsive">
+
+                                <!-- start project list -->
+                                <table id="Table_View" class="table table-striped table-bordered table-sm">
+                                    <thead>
+                                        <tr>
+                                            <th style="text-align:center;">Action</th>
+                                            <th>SNo</th>
+                                            <th>Active</th>
+                                            <th>Name</th>
+                                            <th>Branch</th>
+                                            <th>Group</th>
+                                    </thead>
+                                    <tbody></tbody>
+
+                                </table>
+                                <!-- end project list -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@*Change Password Start*@
+
+<div id="data_Modal_pwd" class="modal fade">
+    <div class="modal-dialog modal-lg" style="width:900px !important;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a href="#" class="close" data-dismiss="modal">&times;</a>
+                <h4>New User</h4>
+                <div id="img_load_pwd" style="width:100%;text-align:center;">
+                    <img src="~/images/working.GIF" />
+                </div>
+            </div>
+            <form id="change_form_password">
+                @*Master*@
+                <div class="form-horizontal">
+                    <div class="col-md-12" style="text-align:right;">
+                        <input id="btn_pwd" type="button" value="Change Password" onclick="changepassword()" class="btn btn-success" />
+                        <input id="btn_cls_pwd" type="button" value="Close" onclick="discon_pwd()" class="btn btn-danger" data-dismiss="modal" />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-2" style="text-align:left;">
+                            ID
+                        </label>
+                        <div class="col-md-2 ">
+                            <label id="txt_id_pwd" class="form-control"></label>
+                        </div>
+                        <label class="control-label col-md-2" style="text-align:left;">
+                            Name
+                        </label>
+                        <div class="col-md-6">
+                            <label id="txt_nam_pwd" class="form-control"></label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-2" style="text-align:left;">
+                            Password
+                        </label>
+                        <div class="col-md-4 ">
+                            <input type="password" id="txt_pwd" class="form-control" placeholder="Password" />
+                        </div>
+                        <label class="control-label col-md-2" style="text-align:left;">
+                            Confirm Password
+                        </label>
+                        <div class="col-md-4">
+                            <input type="password" id="txt_con_pwd" placeholder="Confirm Password" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@*Change Password End*@
+
+@* Create Modal Start *@
+<div id="data_Modal" class="modal fade">
+    <div class="modal-dialog modal-lg" style="width:900px !important;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a href="#" class="close" data-dismiss="modal">&times;</a>
+                <h4>New User</h4>
+                <div id="img_load_sav" style="width:100%;text-align:center;">
+                    <img src="~/images/working.GIF" />
+                </div>
+            </div>
+            <form id="create_form">
+                @*Master*@
+                <div class="form-horizontal">
+                    <div class="col-md-12" style="text-align:right;">
+                        <input id="btn_sav" type="button" value="Save" onclick="savrec()" class="btn btn-success" />
+                        <input id="btn_update" type="button" value="Update" onclick="updrec()" class="btn btn-warning" />
+                        <input id="btn_cls" type="button" value="Close" onclick="discon()" class="btn btn-danger" data-dismiss="modal" />
+                        <div class="icheck-inline col-md-10" style="text-align:right;">
+                            <label>
+                                <input id="ck_act" type="checkbox" class="icheck" data-checkbox="icheckbox_square-grey">Active
+                            </label>
+
+                            @*<label>
+                                <input id="ck_all_bra" type="checkbox" class="icheck" data-checkbox="icheckbox_square-grey">All Branches
+                            </label>*@
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-0" id="txt_no" style="text-align:left;visibility:hidden;">
+                        </label>
+                        <label class="control-label col-md-2" style="text-align:left;">
+                            ID
+                        </label>
+                        <div class="col-md-1" id="txt_id">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-2" style="text-align:left;">
+                            Name
+                        </label>
+                        <div class="col-md-10">
+                            <input type="text" id="txt_nam" class="form-control" placeholder="Name" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-2" style="text-align:left;">
+                            Address
+                        </label>
+                        <div class="col-md-10">
+                            <input type="text" id="txt_address" placeholder="Address" class="form-control" />
+                        </div>
+                    </div>
+                    <div id="div_pwd" class="form-group">
+                        <label class="control-label col-md-2" style="text-align:left;">
+                            Password
+                        </label>
+                        <div class="col-md-4 ">
+                            <input type="password" id="txt_pass" class="form-control" placeholder="Password" />
+                        </div>
+                        <label class="control-label col-md-2" style="text-align:left;">
+                            Confirm Password
+                        </label>
+                        <div class="col-md-4">
+                            <input type="password" id="txt_con_pass" placeholder="Confirm Password" class="form-control" />
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="control-label col-md-2" style="text-align:left;">
+                            Mobile
+                        </label>
+                        <div class="col-md-4">
+                            <input type="text" id="txt_mob" class="form-control" placeholder="Mobile" />
+                        </div>
+                        <label class="control-label col-md-2" style="text-align:left;">
+                            Branch
+                        </label>
+                        <div class="col-md-4">
+                            <input type="text" id="txt_branch" placeholder="Branch" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-2" style="text-align:left;">
+                            Phone
+                        </label>
+                        <div class="col-md-4 ">
+                            <input type="text" id="txt_pho" class="form-control" placeholder="Phone" />
+                        </div>
+                        <label class="control-label col-md-2" style="text-align:left;">
+                            Group
+                        </label>
+                        <div class="col-md-4">
+                            <input type="text" id="txt_group" placeholder="Group" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-6">
+                        </div>
+                        <div class="col-md-6">
+                            <table id="raw_detailsTable_GROUP" class="table table-striped table-bordered">
+
+                                <thead>
+                                    <tr>
+                                        <th style="width:10%"></th>
+                                        <th style="width:30%;">Group</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@* Create Modal End *@
+<script src="~/FunctionJS/User/NewUser.js?@Guid.NewGuid().ToString("n")"></script>
